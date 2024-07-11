@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BootManager</string>
+    <string name="loading">Loading...</string>
+    <string name="enter_total_dismissals_allowed">Enter total dismissals allowed</string>
+    <string name="enter_interval_between_dismissals_minutes">Enter interval between dismissals (minutes)</string>
+    <string name="update_settings">Update Settings</string>
+    <string name="no_boots_detected">No boots detected</string>
 </resources>
