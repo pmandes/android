@@ -1,4 +1,4 @@
-#TODO
+TODO:
 - saving settings from the form
 - setting the notification display time based on the saved settings
 - implementation of notification cancellation action
