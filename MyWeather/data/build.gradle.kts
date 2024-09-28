@@ -58,6 +58,7 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt)
+    implementation(libs.core.ktx)
     ksp(libs.hilt.android.compiler)
 
     //Retrofit
@@ -69,10 +70,20 @@ dependencies {
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
 
+    //Room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+
     //Tests
     testImplementation(libs.junit)
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.truth)
+
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.androidx.room.testing)
 }

@@ -1,12 +1,17 @@
 package pl.madsoft.myweather.data
 
 import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
+import io.mockk.clearAllMocks
+import io.mockk.impl.annotations.MockK
+import io.mockk.unmockkAll
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import pl.madsoft.myweather.data.local.dao.CityDAO
 import pl.madsoft.myweather.data.remote.api.AccuWeatherAPIService
 import pl.madsoft.myweather.data.repository.WeatherRepositoryImpl
 import pl.madsoft.myweather.domain.model.Forecast
@@ -17,15 +22,20 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.time.LocalDate
 
-class WeatherRepositoryImplTest {
+class WeatherRepositoryImplAPITest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var apiService: AccuWeatherAPIService
     private lateinit var repository: WeatherRepository
     private val apiKey = "MOCK_API_KEY"
 
+    @MockK
+    private lateinit var cityDao: CityDAO
+
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
+
         mockWebServer = MockWebServer()
         mockWebServer.start()
 
@@ -35,12 +45,14 @@ class WeatherRepositoryImplTest {
             .build()
             .create(AccuWeatherAPIService::class.java)
 
-        repository = WeatherRepositoryImpl(apiService, apiKey)
+        repository = WeatherRepositoryImpl(apiService, apiKey, cityDao)
     }
 
     @After
     fun tearDown() {
         mockWebServer.shutdown()
+        clearAllMocks()
+        unmockkAll()
     }
 
     @Test
