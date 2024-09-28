@@ -7,14 +7,19 @@ import com.squareup.moshi.JsonClass
 data class CityDTO(
     @Json(name = "Key")
     val key: String,
+
     @Json(name = "LocalizedName")
     val name: String,
+
     @Json(name = "Region")
     val region: RegionDTO,
+
     @Json(name = "Country")
     val country: CountryDTO,
+
     @Json(name = "AdministrativeArea")
     val administrativeArea: AdministrativeAreaDTO,
+
     @Json(name = "GeoPosition")
     val geoPosition: GeoPositionDTO,
 )
@@ -41,6 +46,7 @@ data class AdministrativeAreaDTO(
 data class GeoPositionDTO(
     @Json(name = "Latitude")
     val latitude: Double,
+
     @Json(name = "Longitude")
-    val longitude: Double,
+    val longitude: Double
 )

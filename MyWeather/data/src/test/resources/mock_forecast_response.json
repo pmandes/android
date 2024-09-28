@@ -1,0 +1,178 @@
+{
+  "Headline": {
+    "EffectiveDate": "2024-09-28T08:00:00-04:00",
+    "EffectiveEpochDate": 1727524800,
+    "Severity": 5,
+    "Text": "Przewidywane przelotne opady od: dzisiejszy poranek do: jutrzejsze popołudnie",
+    "Category": "rain",
+    "EndDate": "2024-09-29T20:00:00-04:00",
+    "EndEpochDate": 1727654400,
+    "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?unit=c",
+    "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?unit=c"
+  },
+  "DailyForecasts": [
+    {
+      "Date": "2024-09-28T07:00:00-04:00",
+      "EpochDate": 1727521200,
+      "Temperature": {
+        "Minimum": {
+          "Value": 17.3,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 23.5,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 13,
+        "IconPhrase": "Zachmurzenie duże z przelotnymi opadami",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Rain",
+        "PrecipitationIntensity": "Light"
+      },
+      "Night": {
+        "Icon": 12,
+        "IconPhrase": "Przelotne opady",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Rain",
+        "PrecipitationIntensity": "Light"
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=1&unit=c",
+      "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=1&unit=c"
+    },
+    {
+      "Date": "2024-09-29T07:00:00-04:00",
+      "EpochDate": 1727607600,
+      "Temperature": {
+        "Minimum": {
+          "Value": 16,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 23.3,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 12,
+        "IconPhrase": "Przelotne opady",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Rain",
+        "PrecipitationIntensity": "Light"
+      },
+      "Night": {
+        "Icon": 8,
+        "IconPhrase": "Ponuro",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=2&unit=c",
+      "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=2&unit=c"
+    },
+    {
+      "Date": "2024-09-30T07:00:00-04:00",
+      "EpochDate": 1727694000,
+      "Temperature": {
+        "Minimum": {
+          "Value": 15.9,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 22.5,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 4,
+        "IconPhrase": "Przejściowe zachmurzenia",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 8,
+        "IconPhrase": "Ponuro",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=3&unit=c",
+      "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=3&unit=c"
+    },
+    {
+      "Date": "2024-10-01T07:00:00-04:00",
+      "EpochDate": 1727780400,
+      "Temperature": {
+        "Minimum": {
+          "Value": 7.7,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 22.5,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 6,
+        "IconPhrase": "Zachmurzenie duże",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Rain",
+        "PrecipitationIntensity": "Light"
+      },
+      "Night": {
+        "Icon": 36,
+        "IconPhrase": "Przejściowe zachmurzenia",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=4&unit=c",
+      "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=4&unit=c"
+    },
+    {
+      "Date": "2024-10-02T07:00:00-04:00",
+      "EpochDate": 1727866800,
+      "Temperature": {
+        "Minimum": {
+          "Value": 8.1,
+          "Unit": "C",
+          "UnitType": 17
+        },
+        "Maximum": {
+          "Value": 19.4,
+          "Unit": "C",
+          "UnitType": 17
+        }
+      },
+      "Day": {
+        "Icon": 1,
+        "IconPhrase": "Słonecznie",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 33,
+        "IconPhrase": "Bezchmurnie",
+        "HasPrecipitation": false
+      },
+      "Sources": [
+        "AccuWeather"
+      ],
+      "MobileLink": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=5&unit=c",
+      "Link": "http://www.accuweather.com/pl/us/warsaw-in/46580/daily-weather-forecast/332946?day=5&unit=c"
+    }
+  ]
+}

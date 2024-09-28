@@ -22,10 +22,12 @@ class WeatherRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCurrentWeather(cityKey: String): Weather {
-        TODO("Not yet implemented")
+        val response = apiService.getCurrentConditions(cityKey, apiKey)
+        return response.first().toDomainModel()
     }
 
     override suspend fun getForecast(cityKey: String): Forecast {
-        TODO("Not yet implemented")
+        val response = apiService.get5DayForecast(cityKey, apiKey)
+        return response.toDomainModel()
     }
 }

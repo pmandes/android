@@ -1,14 +1,31 @@
 package pl.madsoft.myweather.domain.model
 
+import java.time.LocalDate
+
 data class Forecast(
-    val city: City,
-    val dailyForecasts: List<DailyForecast> = emptyList()
+    val headline: String,
+    val effectiveDate: LocalDate,
+    val endDate: LocalDate,
+    val severity: Int,
+    val category: String,
+    val dailyForecasts: List<DailyForecast>
 )
 
 data class DailyForecast(
-    val date: String,
+    val date: LocalDate,
     val minTemperature: Double,
     val maxTemperature: Double,
-    val precipitationProbability: Double,
-    val description: String
+    val dayCondition: WeatherCondition,
+    val nightCondition: WeatherCondition,
+    val sources: List<String>,
+    val mobileLink: String,
+    val link: String
+)
+
+data class WeatherCondition(
+    val icon: Int,
+    val iconPhrase: String,
+    val hasPrecipitation: Boolean,
+    val precipitationType: String?,
+    val precipitationIntensity: String?
 )

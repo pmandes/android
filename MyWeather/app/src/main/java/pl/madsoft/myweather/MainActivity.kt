@@ -43,12 +43,19 @@ class MainActivity : ComponentActivity() {
         searchTest("Warszawa")
     }
 
+    // TODO: THIS IS TEMPORARY, TO REMOVE WHEN UI WILL BE CREATED
     private fun searchTest(city: String) {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val cities = weatherRepository.searchCities(city)
-                Log.d("searchTest", "$cities")
+                val weather = weatherRepository.getCurrentWeather(cities.first().key)
+                val forecast = weatherRepository.getForecast(cities.first().key)
+
+                Log.d("City:", "$cities")
+                Log.d("Weather", "$weather")
+                Log.d("Forecast", "$forecast")
+
             } catch (e: Exception) {
                 Log.e("searchTest", "Error: ${e.message}", e)
             }
