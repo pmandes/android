@@ -6,5 +6,6 @@ sealed class MainIntent {
     data class SearchCity(val query: String) : MainIntent()
     data class SelectCity(val city: City) : MainIntent()
     object LoadLastSelectedCity : MainIntent()
+    object LoadSavedCityList : MainIntent()
     object Idle : MainIntent()
 }

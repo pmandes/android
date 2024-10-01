@@ -11,5 +11,6 @@ data class CityEntity(
     val country: String,
     val administrativeArea: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val selected: Boolean
 )

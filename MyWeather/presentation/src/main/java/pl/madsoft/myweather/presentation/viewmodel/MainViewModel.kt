@@ -9,6 +9,9 @@ import kotlinx.coroutines.launch
 import pl.madsoft.myweather.domain.model.City
 import pl.madsoft.myweather.domain.usecase.GetForecastUseCase
 import pl.madsoft.myweather.domain.usecase.GetWeatherUseCase
+import pl.madsoft.myweather.domain.usecase.LoadCityUseCase
+import pl.madsoft.myweather.domain.usecase.LoadSavedCitiesUseCase
+import pl.madsoft.myweather.domain.usecase.SaveSelectedCityUseCase
 import pl.madsoft.myweather.domain.usecase.SearchCityUseCase
 import javax.inject.Inject
 
@@ -16,7 +19,10 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val searchCityUseCase: SearchCityUseCase,
     private val getWeatherUseCase: GetWeatherUseCase,
-    private val getForecastUseCase: GetForecastUseCase
+    private val getForecastUseCase: GetForecastUseCase,
+    private val loadCityUseCase: LoadCityUseCase,
+    private val loadSavedCitiesUseCase: LoadSavedCitiesUseCase,
+    private val saveSelectedCityUseCase: SaveSelectedCityUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow<MainViewState>(MainViewState.Idle)
@@ -26,6 +32,7 @@ class MainViewModel @Inject constructor(
 
     init {
         processIntent(MainIntent.LoadLastSelectedCity)
+        processIntent(MainIntent.LoadSavedCityList)
     }
 
     fun processIntent(intent: MainIntent) {
@@ -33,8 +40,11 @@ class MainViewModel @Inject constructor(
             is MainIntent.SearchCity -> {
                 searchCities(intent.query)
             }
+            is MainIntent.LoadSavedCityList -> {
+                loadSavedCities()
+            }
             is MainIntent.LoadLastSelectedCity -> {
-                loadSelectedCity()
+                loadLastSelectedCity()
             }
             is MainIntent.SelectCity -> {
                 selectCity(intent.city)
@@ -45,15 +55,37 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private fun loadLastSelectedCity() {
+
+    }
+
+    private fun loadSavedCities() {
+        viewModelScope.launch {
+            try {
+                val cities = loadSavedCitiesUseCase()
+                _viewState.value = MainViewState.ShowSearchHistory(cities)
+            } catch (e: Exception) {
+                _viewState.value = MainViewState.Error(e.localizedMessage ?: "Error fetching saved cities.")
+            }
+        }
+    }
+
     private fun selectCity(city: City) {
         viewModelScope.launch {
 
-            // cityRepository.saveSelectedCity(city)
             _viewState.value = MainViewState.Loading
 
             try {
+                saveSelectedCityUseCase(city)
+
                 val currentWeather = getWeatherUseCase(city.key)
                 val forecast = getForecastUseCase(city.key)
+
+                val cities = loadSavedCitiesUseCase()
+
+                _viewState.value = MainViewState.ShowSearchHistory(
+                    history = cities
+                )
 
                 _viewState.value = MainViewState.ShowCurrentWeather(
                     city = city,
@@ -67,10 +99,6 @@ class MainViewModel @Inject constructor(
                 _viewState.value = MainViewState.Error(e.localizedMessage ?: "Error fetching weather.")
             }
         }
-    }
-
-    private fun loadSelectedCity() {
-
     }
 
     private fun searchCities(query: String) {
@@ -91,5 +119,4 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
 }

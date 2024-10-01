@@ -12,6 +12,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -68,7 +69,12 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                 }
 
                 is MainViewState.Error -> {
-                    ErrorScreen(message = (viewState as MainViewState.Error).message)
+                    ErrorScreen(
+                        message = (viewState as MainViewState.Error).message,
+                        onClick = {
+                            viewModel.processIntent(MainIntent.Idle)
+                        }
+                    )
                 }
 
                 is MainViewState.ShowSearchedCityList -> {
@@ -87,6 +93,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                 is MainViewState.ShowSearchHistory -> {
                     TabView(
                         viewState = viewState,
+                        viewModel = viewModel,
                         selectedTabIndex = selectedTabIndex,
                         onTabSelected = { viewModel.selectedTabIndex.value = it }
                     )
@@ -99,6 +106,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
 @Composable
 fun TabView(
     viewState: MainViewState,
+    viewModel: MainViewModel,
     selectedTabIndex: Int,
     onTabSelected: (Int) -> Unit
 ) {
@@ -120,9 +128,20 @@ fun TabView(
             }
         }
 
+        LaunchedEffect(selectedTabIndex) {
+            if (selectedTabIndex == 1) {
+                viewModel.processIntent(MainIntent.LoadSavedCityList)
+            }
+        }
+
         when (selectedTabIndex) {
             0 -> CurrentWeatherScreen(state = viewState)
-            1 -> SearchHistoryScreen(state = viewState)
+            1 -> SearchHistoryScreen(
+                state = viewState,
+                onCitySelected = { selectedCity ->
+                    viewModel.processIntent(MainIntent.SelectCity(selectedCity))
+                }
+            )
         }
     }
 }

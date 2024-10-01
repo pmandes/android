@@ -23,6 +23,7 @@ fun City.toEntity(): CityEntity {
         country = this.country,
         administrativeArea = this.administrativeArea,
         latitude = this.latitude,
-        longitude = this.longitude
+        longitude = this.longitude,
+        selected = false
     )
 }

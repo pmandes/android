@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import pl.madsoft.myweather.domain.model.City
 import pl.madsoft.myweather.presentation.R
+import pl.madsoft.myweather.presentation.ui.common.CardWithGradient
 import pl.madsoft.myweather.presentation.ui.theme.getCardGradientColors
 import pl.madsoft.myweather.presentation.ui.theme.temperatureTextStyle
 

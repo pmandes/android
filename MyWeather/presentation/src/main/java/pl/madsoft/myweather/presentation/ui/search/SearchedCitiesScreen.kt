@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pl.madsoft.myweather.domain.model.City
+import pl.madsoft.myweather.presentation.ui.common.CityItem
 
 @Composable
 fun SearchedCitiesScreen(

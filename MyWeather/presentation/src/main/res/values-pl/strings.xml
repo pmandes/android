@@ -2,12 +2,16 @@
 <resources>
     <!-- MainScreen -->
     <string name="no_weather_data">Brak dostępnych danych pogodowych.</string>
+    <string name="no_saved_cities_data">Brak zapisanych miast.</string>
     <string name="current_weather">Aktualna pogoda</string>
     <string name="search_history">Historia wyszukiwania</string>
 
     <!-- SearchBar -->
     <string name="invalid_city_name">Niepoprawna nazwa miasta</string>
     <string name="search_city">Wyszukaj miasto</string>
+
+    <!-- ErrorScreen -->
+    <string name="back_button">Powrót</string>
 
     <!-- CityInfoCard -->
     <string name="city_country_format">%1$s, %2$s</string>
