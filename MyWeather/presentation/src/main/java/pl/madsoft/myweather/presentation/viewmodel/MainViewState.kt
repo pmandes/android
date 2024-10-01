@@ -8,5 +8,6 @@ sealed class MainViewState {
     object Loading : MainViewState()
     data class ShowCurrentWeather(val weather: Weather) : MainViewState()
     data class ShowSearchHistory(val history: List<City>) : MainViewState()
+    data class ShowSearchedCityList(val cities: List<City>) : MainViewState()
     data class Error(val message: String) : MainViewState()
 }

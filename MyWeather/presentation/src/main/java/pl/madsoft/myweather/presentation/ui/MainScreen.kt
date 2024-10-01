@@ -1,5 +1,6 @@
 package pl.madsoft.myweather.presentation.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,13 +18,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import pl.madsoft.myweather.presentation.viewmodel.MainIntent
 import pl.madsoft.myweather.presentation.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
 
-    val viewState by viewModel.state.collectAsState()
+    val viewState by viewModel.viewState.collectAsState()
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
     var selectedTabIndex by remember { mutableStateOf(0) }
 
@@ -36,6 +38,9 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                 onSearchQueryChange = { searchQuery = it },
                 onSearch = {
 
+                    Log.d("Search", "$searchQuery")
+
+                    viewModel.processIntent(MainIntent.SearchCity(searchQuery.text))
                 }
             )
         }
@@ -48,7 +53,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
         ) {
 
             TabRow(
-                selectedTabIndex = selectedTabIndex
+                selectedTabIndex = selectedTabIndex,
             ) {
                 tabs.forEachIndexed {index, title ->
                     Tab(
