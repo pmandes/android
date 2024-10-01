@@ -1,4 +1,4 @@
-package pl.madsoft.myweather.presentation.ui
+package pl.madsoft.myweather.presentation.ui.historytab
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

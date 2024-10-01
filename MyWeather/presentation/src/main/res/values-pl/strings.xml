@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MainScreen -->
+    <string name="no_weather_data">Brak dostępnych danych pogodowych.</string>
+    <string name="current_weather">Aktualna pogoda</string>
+    <string name="search_history">Historia wyszukiwania</string>
+
+    <!-- SearchBar -->
+    <string name="invalid_city_name">Niepoprawna nazwa miasta</string>
+    <string name="search_city">Wyszukaj miasto</string>
+
+    <!-- CityInfoCard -->
+    <string name="city_country_format">%1$s, %2$s</string>
+    <string name="region_format">Region: %1$s</string>
+    <string name="administrative_area_format">Obszar adm.: %1$s</string>
+    <string name="coordinates_format">Szer.: %1$.2f, Dł.: %2$.2f</string>
+    <string name="country_format">Kraj: %1$s</string>
+
+    <!-- WeatherInfoCard -->
+    <string name="weather_details">Pogoda</string>
+    <string name="feels_like_temperature_format">Odczuwalna temperatura: %1$.1f°C</string>
+    <string name="humidity_format">Wilgotność: %1$d%%</string>
+    <string name="cloudiness_format">Zachmurzenie: %1$d%%</string>
+    <string name="precipitation_possible_format">Możliwe opady: %1$s</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="visibility_format">Widoczność: %1$.1f km</string>
+    <string name="wind_speed_format">Prędkość wiatru: %1$.1f m/s</string>
+    <string name="wind_direction_format">Kierunek wiatru: %1$s</string>
+
+    <!-- ForecastCard -->
+    <string name="forecast">Prognoza</string>
+
+    <!-- DailyForecastItem -->
+    <string name="min_temperature_format">Min: %1$.1f°C</string>
+    <string name="max_temperature_format">Max: %1$.1f°C</string>
+    <string name="day_condition_format">Dzień: %1$s</string>
+    <string name="night_condition_format">Noc: %1$s</string>
+
+</resources>
