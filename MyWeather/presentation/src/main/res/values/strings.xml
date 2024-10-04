@@ -18,7 +18,7 @@
     <string name="city_country_format">%1$s, %2$s</string>
     <string name="region_format">Region: %1$s</string>
     <string name="administrative_area_format">Admin Area: %1$s</string>
-    <string name="coordinates_format">Lat: %1$.2f, Long: %2$.2f</string>
+    <string name="coordinates_format">%1$s, %2$s</string>
     <string name="country_format">Country: %1$s</string>
 
     <!-- WeatherInfoCard -->

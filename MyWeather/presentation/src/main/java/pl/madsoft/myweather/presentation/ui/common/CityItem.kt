@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import pl.madsoft.myweather.common.CoordinateType
+import pl.madsoft.myweather.common.toDMS
 import pl.madsoft.myweather.domain.model.City
 import pl.madsoft.myweather.presentation.R
 
@@ -59,8 +61,8 @@ fun CityItem(city: City, onClick: () -> Unit = {}) {
             Text(
                 text = stringResource(
                     R.string.coordinates_format,
-                    city.latitude,
-                    city.longitude
+                    city.latitude.toDMS(CoordinateType.LATITUDE),
+                    city.longitude.toDMS(CoordinateType.LONGITUDE)
                 ),
                 style = MaterialTheme.typography.bodySmall
             )
