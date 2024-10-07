@@ -7,6 +7,12 @@ import dagger.hilt.components.SingletonComponent
 import pl.madsoft.myweather.data.repository.WeatherRepositoryImpl
 import pl.madsoft.myweather.domain.usecase.GetForecastUseCase
 import pl.madsoft.myweather.domain.usecase.GetWeatherUseCase
+import pl.madsoft.myweather.domain.usecase.IGetForecastUseCase
+import pl.madsoft.myweather.domain.usecase.IGetWeatherUseCase
+import pl.madsoft.myweather.domain.usecase.ILoadCityUseCase
+import pl.madsoft.myweather.domain.usecase.ILoadSavedCitiesUseCase
+import pl.madsoft.myweather.domain.usecase.ISaveSelectedCityUseCase
+import pl.madsoft.myweather.domain.usecase.ISearchCityUseCase
 import pl.madsoft.myweather.domain.usecase.LoadCityUseCase
 import pl.madsoft.myweather.domain.usecase.LoadSavedCitiesUseCase
 import pl.madsoft.myweather.domain.usecase.SaveSelectedCityUseCase
@@ -21,7 +27,7 @@ object UseCaseModule {
     @Singleton
     fun provideSearchCityUseCase(
         repository: WeatherRepositoryImpl
-    ): SearchCityUseCase {
+    ): ISearchCityUseCase {
         return SearchCityUseCase(repository)
     }
 
@@ -29,7 +35,7 @@ object UseCaseModule {
     @Singleton
     fun provideGetWeatherUseCase(
         repository: WeatherRepositoryImpl
-    ): GetWeatherUseCase {
+    ): IGetWeatherUseCase {
         return GetWeatherUseCase(repository)
     }
 
@@ -37,7 +43,7 @@ object UseCaseModule {
     @Singleton
     fun provideGetForecastUseCase(
         repository: WeatherRepositoryImpl
-    ): GetForecastUseCase {
+    ): IGetForecastUseCase {
         return GetForecastUseCase(repository)
     }
 
@@ -45,7 +51,7 @@ object UseCaseModule {
     @Singleton
     fun provideLoadSavedCitiesUseCase(
         repository: WeatherRepositoryImpl
-    ): LoadSavedCitiesUseCase {
+    ): ILoadSavedCitiesUseCase {
         return LoadSavedCitiesUseCase(repository)
     }
 
@@ -53,7 +59,7 @@ object UseCaseModule {
     @Singleton
     fun provideSaveSelectedCityUseCase(
         repository: WeatherRepositoryImpl
-    ): SaveSelectedCityUseCase {
+    ): ISaveSelectedCityUseCase {
         return SaveSelectedCityUseCase(repository)
     }
 
@@ -61,7 +67,7 @@ object UseCaseModule {
     @Singleton
     fun provideLoadCityUseCase(
         repository: WeatherRepositoryImpl
-    ): LoadCityUseCase {
+    ): ILoadCityUseCase {
         return LoadCityUseCase(repository)
     }
 }

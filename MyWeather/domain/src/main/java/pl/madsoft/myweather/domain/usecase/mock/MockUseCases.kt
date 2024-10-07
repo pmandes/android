@@ -1,11 +1,32 @@
-package pl.madsoft.myweather.presentation
+package pl.madsoft.myweather.domain.usecase.mock
 
 import pl.madsoft.myweather.domain.model.City
 import pl.madsoft.myweather.domain.model.DailyForecast
 import pl.madsoft.myweather.domain.model.Forecast
 import pl.madsoft.myweather.domain.model.Weather
 import pl.madsoft.myweather.domain.model.WeatherCondition
+import pl.madsoft.myweather.domain.usecase.IGetForecastUseCase
+import pl.madsoft.myweather.domain.usecase.IGetWeatherUseCase
+import pl.madsoft.myweather.domain.usecase.ISearchCityUseCase
 import java.time.LocalDate
+
+class MockSearchCityUseCase : ISearchCityUseCase {
+    override suspend fun invoke(query: String): List<City> {
+        return MockData.getMockCities()
+    }
+}
+
+class MockGetWeatherUseCase : IGetWeatherUseCase {
+    override suspend fun invoke(cityKey: String): Weather {
+        return MockData.getMockWeather()
+    }
+}
+
+class MockGetForecastUseCase : IGetForecastUseCase {
+    override suspend fun invoke(cityKey: String): Forecast {
+        return MockData.getMockForecast()
+    }
+}
 
 object MockData {
 
@@ -17,6 +38,15 @@ object MockData {
                 region = "Europa",
                 country = "Polska",
                 administrativeArea = "Mazowieckie",
+                latitude = 52.232,
+                longitude = 21.007
+            ),
+            City(
+                key = "23456",
+                name = "Kraków",
+                region = "Europa",
+                country = "Polska",
+                administrativeArea = "Małopolskie",
                 latitude = 52.232,
                 longitude = 21.007
             )
