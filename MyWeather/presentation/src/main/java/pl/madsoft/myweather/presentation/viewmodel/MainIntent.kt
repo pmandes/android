@@ -5,7 +5,6 @@ import pl.madsoft.myweather.domain.model.City
 sealed class MainIntent {
     data class SearchCity(val query: String) : MainIntent()
     data class SelectCity(val city: City) : MainIntent()
-    object LoadLastSelectedCity : MainIntent()
-    object LoadSavedCityList : MainIntent()
-    object Idle : MainIntent()
+    object ShowCurrentWeather : MainIntent()
+    object ShowSearchHistory : MainIntent()
 }
