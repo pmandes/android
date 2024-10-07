@@ -12,7 +12,6 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,7 +40,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
 
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
 
-    val selectedTabIndex by viewModel.selectedTabIndex.collectAsState()
+    var selectedTabIndex by remember { mutableStateOf(0) }
 
     val focusManager = LocalFocusManager.current
 
@@ -58,6 +57,8 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
         }
     ) { innerPadding ->
 
+        Log.d("MainScreen", "viewState -> $viewState")
+
         Box(modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)) {
@@ -72,7 +73,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                     ErrorScreen(
                         message = (viewState as MainViewState.Error).message,
                         onClick = {
-                            viewModel.processIntent(MainIntent.Idle)
+                            viewModel.processIntent(MainIntent.ShowCurrentWeather)
                         }
                     )
                 }
@@ -95,7 +96,15 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                         viewState = viewState,
                         viewModel = viewModel,
                         selectedTabIndex = selectedTabIndex,
-                        onTabSelected = { viewModel.selectedTabIndex.value = it }
+                        onTabSelected = { index ->
+                            selectedTabIndex = index
+                            if (selectedTabIndex == 0) {
+                                viewModel.processIntent(MainIntent.ShowCurrentWeather)
+                            }
+                            if (selectedTabIndex == 1) {
+                                viewModel.processIntent(MainIntent.ShowSearchHistory)
+                            }
+                        }
                     )
                 }
             }
@@ -128,18 +137,13 @@ fun TabView(
             }
         }
 
-        LaunchedEffect(selectedTabIndex) {
-            if (selectedTabIndex == 1) {
-                viewModel.processIntent(MainIntent.LoadSavedCityList)
-            }
-        }
-
         when (selectedTabIndex) {
             0 -> CurrentWeatherScreen(state = viewState)
             1 -> SearchHistoryScreen(
                 state = viewState,
                 onCitySelected = { selectedCity ->
                     viewModel.processIntent(MainIntent.SelectCity(selectedCity))
+                    onTabSelected(0)
                 }
             )
         }
