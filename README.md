@@ -1,130 +1,130 @@
 # MyWeather
 
-## 1. Opis projektu
+## 1. Project Description
 
-Aplikacja MyWeather służy do wyszukiwania i pobierania danych pogodowych. Realizuje ona założenia MVP (Minimum Valuable Product) dla tego typu aplikacji pogodowych.
-Jako źródło danych używa darmowego API dostarczanego przez serwis AccuWeather.
+The MyWeather application is designed for searching and retrieving weather data. It fulfills the MVP (Minimum Viable Product) requirements for a weather application of this kind.
+It uses a free API provided by AccuWeather as its data source.
 
-| ![Aktualna pogoda](docs/screenshot1.jpg) | ![Historia wyszukiwania](docs/screenshot2.jpg) |
+| ![Current Weather](docs/screenshot1.jpg) | ![Search History](docs/screenshot2.jpg) |
 | --- | --- |
 
-## 2. Zaimplementowane wymagane funkcjonalności:
+## 2. Implemented Required Features:
 
-- wyszukiwanie miasta
-- prezentacja listy wyszukiwanych miast z możliwością wyboru
-- pobranie aktualnych danych pogodowych dla wybranego miasta
-- prezentacja danych miasta oraz jego aktualnych warunków pogodowych wg. specyfikacji (temp. aktualna, stan zachmurzenia, możliwość opadów, wilgotność
-- walidacja pola wyszukiwarki wg. wymagań funkcjonalnych: nazwa miejscowości nie może zawierać cyfr ani znaków specjalnych, obsługa polskich znaków, użycie wyrażenia regularnego
-- prezentacja aktualnej temperatury przy pomocy koloru rezprezentującego gorącą, umiarkowaną i niską temperaturę wg. wymagań
+- city search
+- presentation of a list of searched cities with selection option
+- retrieval of current weather data for a selected city
+- presentation of city data and its current weather conditions according to specifications (current temp, cloudiness, precipitation probability, humidity)
+- validation of search field according to functional requirements: city name cannot contain numbers or special characters, support for Polish characters, use of regular expressions
+- presentation of the current temperature with color representing hot, moderate, and low temperatures according to requirements
 
-## 3. Zaimplementowane dodatkowe funkcjonalności
+## 3. Implemented Additional Features
 
-- pobieranie 5-dniowej prognozy pogody dla wybranego miasta i prezentacja w postaci tabeli z podziałem na dni
-- prezentacja dodatkowych szczegółowych danych dla aktualnej pogody jak np. prędkość i kierunek wiatru, odczuwalna temperatura czy widoczność
-- zapisywanie wybranych miast w lokalnej bazie danych
-- prezentacja listy zapisanych miast
-- pobieranie pogody i prognozy dla miasta wybranego z listy zapisanych miast
-- obsługa tematów kolorystycznych dla ustawionego w urządzeniu mobilnym trybu dziennego lub nocnego
-- obsługa wielojęzykowości (i18n), stworzono pliki dla języka polskiego i angielskiego (default)
+- retrieval of a 5-day weather forecast for the selected city, presented in a day-by-day table
+- presentation of additional detailed data for current weather, such as wind speed and direction, feels-like temperature, and visibility
+- saving selected cities to a local database
+- display of the saved cities list
+- retrieval of weather and forecast for a city selected from the saved cities list
+- support for color themes in line with the mobile device’s day or night mode
+- multilingual support (i18n), with files created for both Polish and English languages (default)
 
-## 4. Architektura aplikacji
+## 4. Application Architecture
 
 ### 4.1 Clean Architecture
 
-Zastosowano założenia **Clean Architecture** zakładające podział aplikacji na warstwy: domenową, danych oraz prezentacji.
+The application applies **Clean Architecture** principles, dividing it into layers: domain, data, and presentation.
 
-Celem tego podejścia jest:
-- łatwa w utrzymaniu i klarowna struktura projektu
-- podział na moduły, pozwalający na niezależny development, oraz szybszą kompilację kodu
-- enkapsulacja logiki biznesowej
-- separacja zależności pomiędzy warstwami: warstwy zewnętrzne zależą od wewnętrznych, implementacje konkretne od abstrakcyjnych
-- skalowalność
-- łatwiejsze testowanie
+The goals of this approach are:
+- a maintainable and clear project structure
+- modular division, allowing independent development and faster code compilation
+- encapsulation of business logic
+- separation of dependencies between layers: outer layers depend on inner layers, specific implementations depend on abstractions
+- scalability
+- easier testing
 
-Zastosowano **Dependency Injection** celem konfiguracji i instancjonowania obiektów oraz dostarczania zależności do wyższych warstw.
+**Dependency Injection** is used for configuration and object instantiation, as well as to provide dependencies to higher layers.
 
-### 4.2 Modularyzacja projektu
+### 4.2 Project Modularity
 
-Aplikację podzielono na następujące moduły (od warstwy najniższej/wewnętrznej):
+The application is divided into the following modules (from lowest/innermost layer):
 
-- **domain** - moduł definiujący encje (entities) modelu danych domenowych (domain model) oraz logiki biznesowej: przypadków użycia (use cases) i interfejsu repozytorium
-- **data** - moduł realizujący dostęp do danych, zawierający implementację DTO (data transfer objects) oraz repozytorium, pobieranie danych z API oraz zapis/odczyt do lokalnej bazy danych przy pomocy DAO (data access objects). Warstwa ta też realizuje translację obiektów z bazy danych oraz api (JSON) na obiekty modelu domenowego
-- **common** - moduł pomocniczy zawierający np. funckje walidacji danych
-- **presentation** - moduł zawierający interfejs użytkownika (UI), temat kolorystyczny (theme) i wygląd poszczególnych ekranów oraz kotrolek, a także view model
-- **app** - moduł stanowiący tzw. punkt wejścia do aplikacji (entry point) wywołujący główna aktywność (MainActivity)
+- **domain** - defines entities of the domain model and business logic: use cases and repository interface
+- **data** - manages data access, containing DTO (data transfer objects) implementation and repository, data fetching from the API, and data save/read in a local database using DAO (data access objects). This layer also handles translating database and API objects (JSON) to domain model objects.
+- **common** - auxiliary module containing, for example, data validation functions
+- **presentation** - user interface (UI) module, containing color theme, screen appearance, controls, and view model
+- **app** - entry point to the application, invoking the main activity (MainActivity)
 
-### 4.3 Architektura w warstwie prezentacji
+### 4.3 Presentation Layer Architecture
 
-W wartwie prezentacji zastosowano wzorzec architektoniczny **MVI** (Model - View - Intent), dzięki któremu możliwe jest:
-- zarządzanie stanem
-- niezależność komponentów
-- odtwarzalność stanu i przebiegu procesów
-- jednokierunkowa komunikacja
-- łatwiejszy debbuging i testowanie
+In the presentation layer, the **MVI** (Model - View - Intent) architectural pattern is used, which allows:
+- state management
+- component independence
+- state and process reproducibility
+- unidirectional communication
+- easier debugging and testing
 
-ViewModel - zachowuje i wystawia stan (State) widokom. Intecje (Intent) - definiują interakcje użytkownika.
-Widok (View) aktualizowany jest w oparciu o stan w ViewModelu, który jest tzw. "jedynym źródłem prawdy".
+The ViewModel maintains and exposes the state to the views. Intents define user interactions.
+The View is updated based on the state in the ViewModel, which serves as the "single source of truth."
 
-## 5. Zastosowane frameworki i biblioteki
+## 5. Frameworks and Libraries Used
 
-Zastosowanym językiem programowania jest **Kotlin** w wersji **2.0.20**.
+The programming language used is **Kotlin**, version **2.0.20**.
 
-- **Hilt 2.51** - biblioteka do realizacji wstrzykiwania zależności
-- **Retrofit 2.11** - framework do realizacji komunikacji sieciowej z API REST
-- **Room 2.6.1** - framework ORM do obsługi lokalnych operacji bazodanowych
-- **Coroutines 1.9** - wbudowana w język Kotlin biblioteka do realizacji przetwarzania współbieżnego operacji
-- **Compose 2024.09.02** - biblioteka do deklaratywnego budowania interfejsu użytkownika
-- **Moshi 1.15.1** - biblioteka pomagajaca parsowanie danych JSON
+- **Hilt 2.51** - library for dependency injection
+- **Retrofit 2.11** - framework for REST API communication
+- **Room 2.6.1** - ORM framework for local database operations
+- **Coroutines 1.9** - Kotlin’s built-in library for concurrent operation processing
+- **Compose 2024.09.02** - library for declarative UI building
+- **Moshi 1.15.1** - library assisting with JSON data parsing
 
-Szczegóły znajdują się w pliku **lib.versions.toml**.
+Details are in the **lib.versions.toml** file.
 
-## 6. API AccuWeather
+## 6. AccuWeather API
 
-Do realizacji projektu wybrano API AccuWeather ze względu na prostotę oraz czytelność dokumentacji. Endpointy tego API wprost realizują założenia projektowe aplikacji.
+AccuWeather API was chosen for the project due to its simplicity and clear documentation. The endpoints directly fulfill the project requirements.
 
-Użyte zasoby:
+Resources used:
 
 **Locations API**
-- `GET locations/v1/cities/search - do wyszukiwania miast`
+- `GET locations/v1/cities/search` - for city search
 
 **Forecast API**
-- `GET forecasts/v1/daily/5day/{cityKey} - do pobrania prognozy 5-dniowej dla danego miasta`
+- `GET forecasts/v1/daily/5day/{cityKey}` - for retrieving a 5-day forecast for a given city
 
 **Current Conditions API**
-- `GET currentconditions/v1/{cityKey} - do pobrania aktualnych warunków pogodowych dla danego miasta`
+- `GET currentconditions/v1/{cityKey}` - for retrieving current weather conditions for a given city
 
-Szczegółowa dokumentacja: https://developer.accuweather.com/apis
+Detailed documentation: https://developer.accuweather.com/apis
 
-## 7. Konfiguracja i kompilacja projektu
+## 7. Project Configuration and Build
 
-- Projekt został skonfigurowany do kompilacji z Android SDK API 34.
-- Minimalne API urządzenia: 26 (Android 8)
+- Configured for compilation with Android SDK API 34.
+- Minimum device API: 26 (Android 8)
 - Android Studio: 2024.1.2 Patch 1
 - OpenJDK 17.0.11
 - Gradle 8.7
 
-Aby skompilować projekt wymagany jest własny klucz do API AccuWeather:
+An AccuWeather API key is required to compile the project:
 https://developer.accuweather.com/user/me/apps
 
-Klucz należy umieścić w pliku **local.properties** który nie jest przechowywany w repozytorium.
-Do powyższego pliku należy dodać linię:
+The key should be placed in the **local.properties** file, which is not stored in the repository.
+Add the following line to this file:
 
 `ACCUWEATHER_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-**UWAGA:** W darmowym pakiecie dostępu możliwe jest wykonanie 50 requestów do API / dzień
+**NOTE:** In the free access package, it is possible to make up to 50 API requests per day.
 
-## 8. Testy jednostkowe ###
+## 8. Unit Testing ###
 
-- Zaimplementowano testy jednostkowe w module **data** oraz **common** - do sprawdzenia poprawności działania logiki binzesowej i warstwy danych. Przetestowano podstawowe przypadki użycia. Pokrywają one również warstę domenową.
-- Nie zaimplementowano testów jednostkowych i UI dla warstwy **presentation** z uwagi na ograniczenia czasowe
+- Unit tests have been implemented in the **data** and **common** modules to verify the correct functioning of business logic and data layers. Basic use cases have been tested, covering the domain layer as well.
+- Unit and UI tests for the **presentation** layer have not been implemented due to time constraints.
 
-## 9. Dalszy rozwój aplikacji ###
+## 9. Future Development ###
 
-Aplikacja jest gotowa do dalszego rozwoju. Proponowane dalsze funkcjonalności które są poza zakresem wymagań:
-- wczytywanie z lokalnej DB ostatnich danych ostatnio wybranego miasta zaraz po starcie aplikacji
-- cache'owanie danych: zapis aktualnej pogody i prognozy dla danego miasta w danym dniu do lokalnej DB, aby zminimalizować liczbę wywołań API
-- ekran konfiguracji: wybór jednostek: metryczne / imperialne, język prognozy (parametry obecnie "zahardcodowane" w definicji serwisu) itp.
-- implementacja kolejnych funkcjonalności udostępnionych w API AccuWeather, np. szczegółowa prognoza godzinowa czy na większą liczbę dni (dane dostępne w pakiecie płatnym)
-- zarządzanie listą zapamiętanych miast (np. możliwość usunięcia), jest to już wspierane w logice bzinesowej
+The application is ready for further development. Proposed additional features outside the requirements include:
+- loading the last-selected city’s data from the local DB upon app startup
+- data caching: saving current weather and forecast data for a city on a given day to the local DB, to minimize API calls
+- settings screen: options for units (metric/imperial), forecast language (currently hard-coded in service definition), etc.
+- implementation of additional features provided by the AccuWeather API, such as detailed hourly forecasts or longer-term forecasts (available in paid package)
+- management of the saved cities list (e.g., deletion option), which is already supported in business logic
 
-Projekt należy przygotować do wersji produkcyjnej i wdrożenia. Do rozważenia zastosowanie CI/CD do budowania aplikacji (np. GitLab pipelines).
+The project should be prepared for production and deployment. Consider implementing CI/CD for app building (e.g., GitLab pipelines).
